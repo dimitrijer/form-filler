@@ -2,6 +2,9 @@
   "name": "form-filler",
   "version": "0.0.1",
   "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
   "dependencies": {
     "pdffiller": "0.0.10"
   },

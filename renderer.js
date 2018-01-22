@@ -1,5 +1,4 @@
 let ipcRenderer = require('electron').ipcRenderer;
-let pdfFiller = require('pdffiller');
 
 const submitForm = document.querySelector("#ipcForm");
 const responseParagraph = document.getElementById("response")
@@ -16,13 +15,3 @@ ipcRenderer.on("formProcessed", function(event, data) {
   fillPdf(data);
 })
 
-function fillPdf(data) {
-
-  var sourcePDF = "test/test.pdf";
-  var destinationPDF = "test/test_complete.pdf";
-
-  pdfFiller.fillForm( sourcePDF, destinationPDF, data, function(err) {
-    if (err) throw err;
-    console.log("In callback (we're done).");
-  });
-}

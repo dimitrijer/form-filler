@@ -5,6 +5,7 @@ const { ipcMain, app, BrowserWindow } = require('electron')
 const path = require('path')
 const url = require('url')
 
+let pdfFiller = require('pdffiller');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -34,8 +35,17 @@ function createWindow () {
   // main.js
   ipcMain.on("submitForm", function(event, data) {
     // Access form data here
-    event.sender.send("formProcessed", data);
-  });
+ //   event.sender.send("formProcessed", data);
+
+    var sourcePDF = "test/test.pdf";
+    var destinationPDF = "test/test_complete.pdf";
+
+      console.log("Printing to test complete " + JSON.stringify(data));
+    pdfFiller.fillForm( sourcePDF, destinationPDF, data, function(err) {
+      if (err) throw err;
+      console.log("In callback (we're done).");
+    });
+  })
 }
 
 // This method will be called when Electron has finished
